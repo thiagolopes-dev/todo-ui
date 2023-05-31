@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { Task } from '../shared/task';
 import { TaskService } from '../shared/task.service';
@@ -9,11 +9,11 @@ import { TaskService } from '../shared/task.service';
   templateUrl: './task-list-item.component.html',
   styleUrls: ['./task-list-item.component.css']
 })
-export class TaskListItemComponent implements OnInit {
+export class TaskListItemComponent {
 
   @Input()
   task: Task = new Task;
-  visibleDialogExcluir: boolean = false;
+  visibleDialogExcluir = false;
   @Output()
   ondDeleteTask = new EventEmitter();
 
@@ -22,10 +22,6 @@ export class TaskListItemComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) { }
-
-
-  ngOnInit() {
-  }
 
   confirmDelete(task: Task) {
     this.confirmationService.confirm({
@@ -36,7 +32,7 @@ export class TaskListItemComponent implements OnInit {
         this.remove(task);
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Removido com sucesso!' });
       },
-      reject: (type: any) => {
+      reject: (type: ConfirmEventType) => {
         switch (type) {
           case ConfirmEventType.REJECT:
             this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'Você rejeitou' });
@@ -51,13 +47,14 @@ export class TaskListItemComponent implements OnInit {
 
 
   remove(task: Task) {
-    this.taskService.delete(task._id).subscribe(() => {
-      this.ondDeleteTask.emit(task);
-    });
+    if (task._id) {
+      this.taskService.delete(task._id).subscribe(() => {
+        this.ondDeleteTask.emit(task);
+      });
+    }
   }
 
   onCheckChange(task: Task) {
-    this.taskService.save(task).subscribe(() => {
-    });
+    this.taskService.save(task).subscribe();
   }
 }

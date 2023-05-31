@@ -3,12 +3,12 @@
 </div>
 
 <div class="flex col-12">
-    <button pButton pRipple icon="pi pi-plus" label="Nova Tarefa" class="p-button-primary"
-        [routerLink]="['/new']"></button>
+    <button pButton pRipple icon="pi pi-plus" label="Nova Tarefa" class="p-button-primary" [routerLink]="['/new']">Nova
+        Tarefa</button>
 </div>
 
 <section>
-    <div *ngIf="tasks.length == 0" class="flex col-12 font-bold text-red-600" role="alert">
+    <div *ngIf="tasks.length === 0" class="flex col-12 font-bold text-red-600" role="alert">
         Nenhuma tarefa foi cadastrada ainda.
     </div>
 
