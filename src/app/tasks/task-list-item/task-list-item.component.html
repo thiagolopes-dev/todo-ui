@@ -1,0 +1,18 @@
+<div class="form-group form-check">
+    <p-checkbox [(ngModel)]="task.completed" (change)="onCheckChange(task)" [binary]="true"
+        inputId="binary"></p-checkbox>
+    <!-- <input type="checkbox" class="form-check-input" [(ngModel)]="task.completed" (change)="onCheckChange(task)" /> -->
+</div>
+
+<div [innerHTML]="task.description" class="task-item-description ml-2"
+    [ngClass]="task.completed ? 'task-completed' : ''">
+</div>
+
+<div class="flex">
+    <button pButton pRipple icon="pi pi-pencil" label="Editar" class="p-button-primary"
+        [routerLink]="['/edit', task._id]"></button>
+</div>
+<div>
+    <button pButton pRipple icon="pi pi-trash" label="Excluir" class="p-button-danger ml-2"
+        (click)="confirmDelete(task)"></button>
+</div>

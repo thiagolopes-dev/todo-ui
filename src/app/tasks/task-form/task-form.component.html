@@ -1,0 +1,19 @@
+<div class="flex col-12 justify-content-center">
+    <h2>{{ title }}</h2>
+</div>
+<section id="form">
+    <form (ngSubmit)="onSubmit()" #formTask="ngForm">
+        <div class="col-12">
+            <span class="p-float-label">
+                <textarea id="float-input" rows="8" pInputTextarea [(ngModel)]="task.description"
+                    name="description"></textarea>
+                <label for="float-input">Digite aqui uma tarefa que deseja salvar!</label>
+            </span>
+        </div>
+        <div class="flex col-12">
+            <button pButton pRipple icon="pi pi-save" label="Salvar" class="p-button-success" type="submit"></button>
+            <button pButton pRipple icon="pi pi-replay" label="Cancelar" class="p-button-secondary ml-2"
+                [routerLink]="['']"></button>
+        </div>
+    </form>
+</section>

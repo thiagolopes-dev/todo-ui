@@ -1,0 +1,21 @@
+<div class="flex col-12 justify-content-center">
+    <h2>Tarefas</h2>
+</div>
+
+<div class="flex col-12">
+    <button pButton pRipple icon="pi pi-plus" label="Nova Tarefa" class="p-button-primary"
+        [routerLink]="['/new']"></button>
+</div>
+
+<section>
+    <div *ngIf="tasks.length == 0" class="flex col-12 font-bold text-red-600" role="alert">
+        Nenhuma tarefa foi cadastrada ainda.
+    </div>
+
+    <ul class="list-none" *ngIf="tasks.length > 0">
+        <li class="list-group-item" *ngFor="let task of tasks">
+            <app-task-list-item [task]="task" class="task-item"
+                (ondDeleteTask)="onTaskDeleted($event)"></app-task-list-item>
+        </li>
+    </ul>
+</section>
